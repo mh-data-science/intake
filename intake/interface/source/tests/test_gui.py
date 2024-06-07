@@ -1,19 +1,21 @@
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Copyright (c) 2012 - 2019, Anaconda, Inc. and Intake contributors
 # All rights reserved.
 #
 # The full license is in the LICENSE file, distributed with this software.
-#-----------------------------------------------------------------------------
-from distutils.version import LooseVersion
+# -----------------------------------------------------------------------------
 import pytest
-pn = pytest.importorskip('panel')
-too_old = LooseVersion(pn.__version__) < LooseVersion("0.9.5")
+from packaging.version import Version
+
+pn = pytest.importorskip("panel")
+too_old = Version(pn.__version__) < Version("0.9.5")
 
 
 @pytest.mark.skipif(too_old, reason="Use with latest panel")
 @pytest.fixture
 def gui(sources1):
     from ..gui import SourceGUI
+
     return SourceGUI(sources=sources1)
 
 
@@ -44,13 +46,14 @@ def test_gui_close_and_open_select(gui, sources1):
 def test_gui_getstate(gui, sources1):
     state = gui.__getstate__()
 
-    assert state['visible']is True
-    assert state['plot']['visible'] is False
-    assert state['select']['selected'] == [sources1[0].name]
+    assert state["visible"] is True
+    assert state["plot"]["visible"] is False
+    assert state["select"]["selected"] == [sources1[0].name]
 
 
 def test_gui_state_roundtrip(gui, sources1):
     from ..gui import SourceGUI
+
     other = SourceGUI.from_state(gui.__getstate__())
 
     assert other.select.items == sources1
@@ -61,6 +64,7 @@ def test_gui_state_roundtrip(gui, sources1):
 
 def test_gui_state_roundtrip_with_subpanels(gui, sources1):
     from ..gui import SourceGUI
+
     gui.plot.visible = True
 
     other = SourceGUI.from_state(gui.__getstate__())

@@ -382,7 +382,7 @@ to the constructor takes the same form as ``parameters`` above: a dict of user p
 either as ``UserParameter`` instances or as a dictionary spec for each one.
 
 Templating parameters
-''''''''''''''''''
+'''''''''''''''''''''
 
 Template functions can also be used in parameters (see `Templating`_, above), but you can use the available functions directly without the extra `{{...}}`.
 
@@ -509,6 +509,18 @@ authentication (anonymous access), respectively
            token: "anon"
 
 .. _caching:
+
+**Using S3 Profiles**
+
+An AWS profile may be specified as an argument under ``storage_options`` via the following format:
+
+.. code-block:: yaml
+
+      args:
+        urlpath: s3://bucket/path/*.csv
+        storage_options:
+          profile: aws-profile-name
+
 
 Caching
 '''''''

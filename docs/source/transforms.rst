@@ -29,7 +29,7 @@ Consider the following *target* dataset, which loads some simple facts
 about US states from a CSV file. This  example is taken from the Intake
 test suite.
 
-.. code-block::yaml
+.. code-block:: yaml
 
     sources:
       input_data:
@@ -50,7 +50,7 @@ data source class, and the parameters passed are specific to the transform type.
 Note that the driver is referred to by it's fully-qualified name in the
 Intake package.
 
-.. code-block::yaml
+.. code-block:: yaml
 
       derive_cols:
         driver: intake.source.derived.Columns
@@ -160,19 +160,24 @@ Spark object to work with. It should, of course, explain in its documentation wh
 assumptions are being made and that, presumably, the user is expected to also call
 ``.to_spark`` if they wished to directly manipulate the spark object.
 
+Plugin examples
+```````````````
+
+ - call `.sel` on xarray datasets `xarray-plugin-transform`_
+
+.. _xarray-plugin-transform: https://github.com/intake/intake-xarray/blob/master/intake_xarray/derived.py#L38
+
 API
 ```
 
 .. autosummary::
    intake.source.derived.DerivedSource
-   intake.source.derived.Alias
+   intake.source.derived.AliasSource
    intake.source.derived.GenericTransform
    intake.source.derived.DataFrameTransform
    intake.source.derived.Columns
 
 .. autoclass:: intake.source.derived.DerivedSource
-   :members: __init__
-.. autoclass:: intake.source.derived.Alias
    :members: __init__
 .. autoclass:: intake.source.derived.GenericTransform
    :members: __init__
